@@ -21,8 +21,7 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       API_BASE_URL: 'https://snapmeter.com/api/public',
-      AUTH_TOKEN:
-        process.env.SNAPMETER_AUTH_TOKEN,
+      AUTH_TOKEN: process.env.SNAPMETER_AUTH_TOKEN,
       METER_ID: process.env.METER_ID,
       SERVICE_ID: process.env.SERVICE_ID,
     },

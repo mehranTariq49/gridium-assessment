@@ -8,13 +8,15 @@
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-light: #9ca3af;
-  --bg-primary: #ffffff;
+  --bg-primary: #fff;
   --bg-secondary: #f9fafb;
   --bg-tertiary: #f3f4f6;
   --border-color: #e5e7eb;
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
@@ -27,8 +29,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #649070 100%);
@@ -54,7 +57,7 @@ body {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
 .hero .subtitle {
@@ -86,13 +89,15 @@ body {
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(90deg,
+      var(--primary-color),
+      var(--primary-light));
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -103,7 +108,9 @@ body {
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-xl), 0 0 0 1px var(--primary-light);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 0 1px var(--primary-light);
 }
 
 .card h2 {
@@ -167,7 +174,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgb(255 255 255 / 20%);
   border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
   transition: all 0.2s ease;
@@ -175,7 +182,7 @@ body {
 }
 
 .back-link:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgb(255 255 255 / 30%);
   transform: translateX(-4px);
 }
 
@@ -184,11 +191,11 @@ body {
   font-weight: 800;
   color: white;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
 .page-description {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgb(255 255 255 / 95%);
   font-size: 1.125rem;
 }
 
@@ -255,7 +262,7 @@ body {
 .filter-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 10%);
 }
 
 .sort-button {
@@ -365,13 +372,35 @@ body {
   display: flex;
   align-items: center;
   padding: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   gap: 1rem;
 }
 
-.bill-header:hover {
-  background: var(--bg-secondary);
+.bill-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  gap: 1rem;
+}
+
+.bill-content:hover {
+  opacity: 0.8;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  margin-left: auto;
+}
+
+.expand-button:hover {
+  background: var(--bg-tertiary);
 }
 
 .bill-period {
@@ -415,7 +444,7 @@ body {
 }
 
 .bill-details {
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.5rem 1.5rem;
   background: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
 }
@@ -497,7 +526,7 @@ body {
   color: #991b1b;
 }
 
-@media (max-width: 768px) {
+@media (width <=768px) {
   .hero h1 {
     font-size: 2rem;
   }
@@ -599,17 +628,17 @@ body {
   text-align: center;
 }
 
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-tertiary);
+}
+
 .pagination-btn:hover:not(:disabled) {
   background: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
   transform: translateY(-1px);
-}
-
-.pagination-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: var(--bg-tertiary);
 }
 
 .pagination-btn.active {
