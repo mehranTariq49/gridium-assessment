@@ -1,0 +1,132 @@
+<div class="data-display">
+  {{#if this.totalStatistics}}
+  <div class="statistics-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total Bills</div>
+      <div class="stat-value">{{this.totalStatistics.count}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Cost</div>
+      <div class="stat-value">{{this.formatCurrency this.totalStatistics.totalCost}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Average Cost</div>
+      <div class="stat-value">{{this.formatCurrency this.totalStatistics.avgCost}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Usage</div>
+      <div class="stat-value">{{this.totalStatistics.totalUsage}} kWh</div>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="table-controls"></div>
+
+  <div class="bills-list">
+    {{#each this.paginatedBills as |bill|}}
+    <div class="bill-card {{if (this.isExpanded bill.id) 'expanded'}}">
+      <div class="bill-header" {{on "click" (fn this.toggleBillDetails bill.id)}}>
+        <div class="bill-period">
+          <h3>{{this.formatDate (this.periodStart bill)}} - {{this.formatDate (this.periodEnd bill)}}</h3>
+          <span class="bill-service">Service: {{this.serviceId bill}}</span>
+        </div>
+        <div class="bill-summary">
+          <div class="bill-cost">{{this.formatCurrency (this.totalCost bill)}}</div>
+          <div class="bill-usage">{{this.usedKwh bill}} kWh</div>
+        </div>
+        <div class="expand-icon">
+          {{if (this.isExpanded bill.id) "▼" "▶"}}
+        </div>
+      </div>
+
+      {{#if (this.isExpanded bill.id)}}
+      <div class="bill-details">
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="detail-label">Initial Date:</span>
+            <span class="detail-value">{{this.formatDate (this.initialOrStart bill)}}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Period Start:</span>
+            <span class="detail-value">{{this.formatDate (this.periodStart bill)}}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Period End:</span>
+            <span class="detail-value">{{this.formatDate (this.periodEnd bill)}}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Service ID:</span>
+            <span class="detail-value">{{this.serviceId bill}}</span>
+          </div>
+          {{#if (this.utilityAccountId bill)}}
+          <div class="detail-item">
+            <span class="detail-label">Utility Account ID:</span>
+            <span class="detail-value">{{this.utilityAccountId bill}}</span>
+          </div>
+          {{/if}}
+          {{#if (this.publishedOrClosing bill)}}
+          <div class="detail-item">
+            <span class="detail-label">Published:</span>
+            <span class="detail-value">{{this.formatDate (this.publishedOrClosing bill)}}</span>
+          </div>
+          {{/if}}
+          <div class="detail-item highlight">
+            <span class="detail-label">Total Cost:</span>
+            <span class="detail-value">{{this.formatCurrency (this.totalCost bill)}}</span>
+          </div>
+          <div class="detail-item highlight">
+            <span class="detail-label">Usage:</span>
+            <span class="detail-value">{{this.usedKwh bill}} kWh</span>
+          </div>
+          {{#if (this.peakDemand bill)}}
+          <div class="detail-item">
+            <span class="detail-label">Peak/Demand:</span>
+            <span class="detail-value">{{this.peakDemand bill}} kW</span>
+          </div>
+          {{/if}}
+          {{#if bill.items}}
+          <div class="detail-item full-width">
+            <span class="detail-label">Items:</span>
+            <span class="detail-value">{{bill.items}} items</span>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      {{/if}}
+    </div>
+    {{else}}
+    <div class="no-data">No bills found</div>
+    {{/each}}
+  </div>
+
+  {{#if this.bills.length}}
+  <div class="pagination-controls">
+    <div class="pagination-info">
+      Showing {{this.paginatedBills.length}} of {{this.bills.length}} bills
+      (Page {{this.pagination.currentPage}} of {{this.totalPages}})
+    </div>
+
+    <div class="pagination-buttons">
+      <button {{on "click" this.previousPage}} class="pagination-btn" disabled={{this.isPreviousDisabled}}>
+        ← Previous
+      </button>
+
+      {{#each this.pageNumbers as |page|}}
+      {{#if page.isActive}}
+      <button {{on "click" (fn this.goToPage page.number)}} class="pagination-btn active">
+        {{page.number}}
+      </button>
+      {{else}}
+      <button {{on "click" (fn this.goToPage page.number)}} class="pagination-btn">
+        {{page.number}}
+      </button>
+      {{/if}}
+      {{/each}}
+
+      <button {{on "click" this.nextPage}} class="pagination-btn" disabled={{this.isNextDisabled}}>
+        Next →
+      </button>
+    </div>
+  </div>
+  {{/if}}
+</div>

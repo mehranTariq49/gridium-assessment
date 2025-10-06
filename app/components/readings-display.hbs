@@ -1,0 +1,65 @@
+<div class="data-display">
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Value</th>
+          <th>Unit</th>
+          <th>Service ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.paginatedReadings as |reading|}}
+        <tr>
+          <td>{{this.formatDate reading.timestamp}}</td>
+          <td class="value-cell">{{reading.value}}</td>
+          <td>{{reading.unit}}</td>
+          <td>{{reading.serviceId}}</td>
+        </tr>
+        {{else}}
+        <tr>
+          <td colspan="4" class="no-data">No readings found</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  {{#if this.readings.length}}
+  <div class="pagination-controls">
+    <div class="pagination-info">
+      Showing
+      {{this.paginatedReadings.length}}
+      of
+      {{this.readings.length}}
+      readings (Page
+      {{this.pagination.currentPage}}
+      of
+      {{this.totalPages}})
+    </div>
+
+    <div class="pagination-buttons">
+      <button {{on "click" this.previousPage}} class="pagination-btn" disabled={{this.isPreviousDisabled}}>
+        ← Previous
+      </button>
+
+      {{#each this.pageNumbers as |page|}}
+      {{#if page.isActive}}
+      <button {{on "click" (fn this.goToPage page.number)}} class="pagination-btn active">
+        {{page.number}}
+      </button>
+      {{else}}
+      <button {{on "click" (fn this.goToPage page.number)}} class="pagination-btn">
+        {{page.number}}
+      </button>
+      {{/if}}
+      {{/each}}
+
+      <button {{on "click" this.nextPage}} class="pagination-btn" disabled={{this.isNextDisabled}}>
+        Next →
+      </button>
+    </div>
+  </div>
+  {{/if}}
+</div>
