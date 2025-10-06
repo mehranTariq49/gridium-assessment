@@ -1,0 +1,34 @@
+{{page-title "Dashboard - Gridium Energy Analytics"}}
+
+<div class="dashboard">
+  <div class="hero">
+    <h1>Gridium Energy Analytics</h1>
+    <p class="subtitle">Monitor your energy consumption and billing data in
+      real-time</p>
+  </div>
+
+  <div class="dashboard-cards">
+    <LinkTo @route="readings" class="card card-readings">
+      <h2>Meter Readings</h2>
+      <p>View detailed energy consumption readings over time with interactive
+        charts and analytics.</p>
+      <span class="card-action">View Readings →</span>
+    </LinkTo>
+
+    <LinkTo @route="bills" class="card card-bills">
+      <h2>Billing Information</h2>
+      <p>Access your billing history, costs, and charges with comprehensive
+        breakdowns.</p>
+      <span class="card-action">View Bills →</span>
+    </LinkTo>
+  </div>
+
+  <div class="info-section">
+    <h3>About This Dashboard</h3>
+    <p>
+      This dashboard provides a comprehensive view of your energy data from
+      Snapmeter. The readings section shows meter data points over time, while
+      the bills section displays your billing history and cost breakdowns.
+    </p>
+  </div>
+</div>

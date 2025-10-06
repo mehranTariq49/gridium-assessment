@@ -1,0 +1,35 @@
+{{page-title "Bills - Gridium Energy Analytics"}}
+
+<div class="page-container">
+  <header class="page-header">
+    <LinkTo @route="dashboard" class="back-link">← Back to Dashboard</LinkTo>
+    <h1>Billing Information</h1>
+    <p class="page-description">Billing history from September 2023 to September
+      2025</p>
+  </header>
+
+  <div class="content">
+    {{#if @model.error}}
+      <div class="error-message">
+        <h3>⚠️ Error Loading Data</h3>
+        <p>{{@model.error}}</p>
+      </div>
+    {{else if @model.bills}}
+      {{#if @model.dateRange}}
+        <div class="performance-warning">
+          <h4>Billing Data:
+            {{@model.dateRange.start}}
+            to
+            {{@model.dateRange.end}}</h4>
+          <p>Showing {{@model.totalCount}} bills for optimal performance.</p>
+        </div>
+      {{/if}}
+      <BillsDisplay @data={{@model.bills}} />
+    {{else}}
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading bills data...</p>
+      </div>
+    {{/if}}
+  </div>
+</div>

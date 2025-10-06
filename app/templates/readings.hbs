@@ -1,0 +1,38 @@
+{{page-title "Meter Readings - Gridium Energy Analytics"}}
+
+<div class="page-container">
+  <header class="page-header">
+    <LinkTo @route="dashboard" class="back-link">← Back to Dashboard</LinkTo>
+    <h1>Meter Readings</h1>
+    <p class="page-description">Energy consumption data from September 2023 to
+      September 2025</p>
+  </header>
+
+  <div class="content">
+    {{#if @model.error}}
+      <div class="error-message">
+        <h3>⚠️ Error Loading Data</h3>
+        <p>{{@model.error}}</p>
+      </div>
+    {{else if @model.readings}}
+      {{#if @model.dateRange}}
+        <div class="performance-warning">
+          <h4>Data Range:
+            {{@model.dateRange.start}}
+            to
+            {{@model.dateRange.end}}</h4>
+          <p>Showing
+            {{@model.totalCount}}
+            readings for optimal performance. Use filters to narrow down
+            results.</p>
+        </div>
+      {{/if}}
+      <ReadingsDisplay @data={{@model.readings}} />
+    {{else}}
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading readings data...</p>
+      </div>
+    {{/if}}
+  </div>
+</div>
